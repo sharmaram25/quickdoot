@@ -2,7 +2,7 @@
 
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
-import { ArrowRight, Package, Shield, Zap, Smartphone, MapPin, Users, Star } from 'lucide-react';
+import { ArrowRight, Package, Shield, Zap, Smartphone, MapPin, Users, Star, Car } from 'lucide-react';
 import styles from './home.module.css';
 
 export default function Home() {
@@ -17,12 +17,16 @@ export default function Home() {
         floating 3D-style phone interaction on right.
       */}
       <section className={styles.heroSection}>
+        {/* Decorative Background Elements */}
+        <div className={`${styles.blob} ${styles.blob1}`} />
+        <div className={`${styles.blob} ${styles.blob2}`} />
+
         <div className={styles.heroContent}>
           <motion.div 
             className={styles.heroText}
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
             <h1>Send anything,<br /> anywhere,<br /> with anyone.</h1>
             <p>
@@ -38,24 +42,39 @@ export default function Home() {
               </a>
             </div>
             
-            <div style={{ marginTop: '3rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <motion.div 
+              style={{ marginTop: '3rem', display: 'flex', alignItems: 'center', gap: '1rem' }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
               <div style={{ display: 'flex' }}>
                 {[1,2,3,4].map(i => (
                   <div key={i} style={{ 
-                    width: '40px', 
-                    height: '40px', 
+                    width: '45px', 
+                    height: '45px', 
                     borderRadius: '50%', 
-                    background: `#ddd url(https://picsum.photos/seed/${i}/100)`,
+                    background: `#f0f9ff url(https://picsum.photos/seed/${i + 15}/100)`,
                     backgroundSize: 'cover',
                     border: '3px solid #fff',
-                    marginLeft: i > 1 ? '-15px' : 0
+                    marginLeft: i > 1 ? '-18px' : 0,
+                    boxShadow: '0 4px 10px rgba(0,0,0,0.1)'
                   }} />
                 ))}
               </div>
-              <span style={{ fontSize: '0.9rem', fontWeight: '600', color: '#555' }}>
-                Trusted by 50,000+ users
-              </span>
-            </div>
+              <div>
+                <div style={{ display: 'flex', gap: '2px', color: '#fbbf24', marginBottom: '4px' }}>
+                  <Star size={16} fill="currentColor" />
+                  <Star size={16} fill="currentColor" />
+                  <Star size={16} fill="currentColor" />
+                  <Star size={16} fill="currentColor" />
+                  <Star size={16} fill="currentColor" />
+                </div>
+                <span style={{ fontSize: '0.9rem', fontWeight: '600', color: '#64748b' }}>
+                  Trusted by 50,000+ happy dooters
+                </span>
+              </div>
+            </motion.div>
           </motion.div>
 
           <motion.div 
@@ -74,20 +93,119 @@ export default function Home() {
                 background: 'linear-gradient(180deg, #f0f0f0 0%, #ffffff 100%)',
                 display: 'flex', flexDirection: 'column'
               }}>
-                {/* Mock UI Header */}
-                <div style={{ padding: '2rem 1.5rem', background: '#fff' }}>
-                  <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: '#eee', marginBottom: '1rem' }}></div>
-                  <div style={{ height: '10px', width: '100px', background: '#eee', borderRadius: '5px' }}></div>
+                {/* Mock UI Header - Status Bar & Search */}
+                <div style={{ padding: '1rem', background: '#fff', zIndex: 20 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px', fontSize: '10px', fontWeight: 'bold' }}>
+                    <span>9:41</span>
+                    <div style={{ display: 'flex', gap: '4px' }}>
+                      <div style={{ width: 12, height: 12, background: '#000', borderRadius: '2px' }} />
+                      <div style={{ width: 12, height: 12, background: '#000', borderRadius: '50%' }} />
+                    </div>
+                  </div>
+                  <div style={{ 
+                    background: '#f3f4f6', 
+                    padding: '10px 15px', 
+                    borderRadius: '12px', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    gap: '10px',
+                    boxShadow: '0 2px 5px rgba(0,0,0,0.05)'
+                  }}>
+                    <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#ef4444' }}></div>
+                    <span style={{ fontSize: '0.8rem', color: '#6b7280', fontWeight: '500' }}>Where to?</span>
+                  </div>
                 </div>
+
                 {/* Mock Map View */}
-                <div style={{ flex: 1, background: '#e1e5ea', position: 'relative' }}>
-                   {/* Map Markers */}
+                <div style={{ flex: 1, position: 'relative', overflow: 'hidden', background: '#e5e7eb' }}>
+                   {/* Reliable Static Map Image (Google Maps Style) */}
+                   <img 
+                     src="/raipur-map.png" 
+                     alt="Raipur City Map"
+                     style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.95 }}
+                   />
+                   
+                   {/* Route Line SVG */}
+                   <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 2 }}>
+                     <motion.path 
+                       d="M 120 250 Q 200 350 180 450" 
+                       fill="transparent" 
+                       stroke="#0ea5e9" 
+                       strokeWidth="4" 
+                       strokeDasharray="8 4"
+                       strokeLinecap="round"
+                       initial={{ strokeDashoffset: 0 }}
+                       animate={{ strokeDashoffset: -100 }}
+                       transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+                     />
+                     {/* Start Dot */}
+                     <circle cx="120" cy="250" r="4" fill="#ef4444" />
+                   </svg>
+
+                   {/* Floating Context Label */}
+                   <div style={{ position: 'absolute', top: '20px', right: '20px', background: 'rgba(255,255,255,0.9)', padding: '6px 12px', borderRadius: '15px', fontSize: '0.7rem', fontWeight: 'bold', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', zIndex: 10 }}>
+                      Raipur, CG
+                   </div>
+
+                   {/* Marker: Sender */}
                    <motion.div 
-                     style={{ position: 'absolute', top: '30%', left: '40%', color: '#000' }}
-                     animate={{ scale: [1, 1.2, 1] }}
-                     transition={{ repeat: Infinity, duration: 2 }}
+                     style={{ position: 'absolute', top: '230px', left: '105px', zIndex: 5 }}
+                     initial={{ scale: 0 }}
+                     animate={{ scale: 1 }}
                    >
-                     <MapPin size={32} fill="#000" />
+                     <div style={{ position: 'relative' }}>
+                       <div style={{ width: 30, height: 30, background: '#fff', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 10px rgba(0,0,0,0.2)' }}>
+                          <div style={{ width: 12, height: 12, background: '#ef4444', borderRadius: '50%' }}></div>
+                       </div>
+                     </div>
+                   </motion.div>
+
+                   {/* Marker: Receiver */}
+                   <motion.div 
+                     style={{ position: 'absolute', top: '440px', left: '165px', zIndex: 5 }}
+                     initial={{ scale: 0 }}
+                     animate={{ scale: 1 }}
+                   >
+                     <div style={{ width: 30, height: 30, background: '#000', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 10px rgba(0,0,0,0.3)' }}>
+                        <MapPin size={14} color="#fff" />
+                     </div>
+                     <div style={{ position: 'absolute', top: -30, left: '50%', transform: 'translateX(-50%)', background: '#000', color: '#fff', padding: '4px 8px', borderRadius: '8px', fontSize: '0.6rem', whiteSpace: 'nowrap' }}>
+                        Drop off
+                     </div>
+                   </motion.div>
+
+                   {/* Moving Driver - Car Animation */}
+                   <motion.div 
+                     style={{ position: 'absolute', zIndex: 6 }}
+                     // Bezier curve approximation for: M 120 250 Q 200 350 180 450
+                     // Adjusted for icon center offset (-15px)
+                     animate={{ 
+                       top: [235, 285, 335, 385, 435], 
+                       left: [105, 139, 160, 169, 165],
+                       rotate: [25, 45, 80, 100, 110] // Approximate tangential rotation
+                     }} 
+                     transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                   >
+                      <div style={{ 
+                        background: '#fff', 
+                        padding: '8px', 
+                        borderRadius: '50%', 
+                        boxShadow: '0 4px 15px rgba(0,0,0,0.15)', 
+                        border: '2px solid #10b981',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: '36px',
+                        height: '36px'
+                      }}>
+                        <Car size={18} color="#10b981" fill="#ecfdf5" />
+                      </div>
+                      {/* Pulse Effect */}
+                      <motion.div 
+                        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', borderRadius: '50%', background: 'rgba(16, 185, 129, 0.4)', zIndex: -1 }}
+                        animate={{ scale: [1, 2], opacity: [0.6, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                      />
                    </motion.div>
                 </div>
                 {/* Mock Bottom Sheet */}
@@ -111,7 +229,7 @@ export default function Home() {
               <div className={styles.floatIcon}><Package size={24} /></div>
               <div>
                 <div style={{ fontWeight: 'bold' }}>Package Delivered</div>
-                <div style={{ fontSize: '0.8rem', color: '#666' }}>2 mins ago • New York</div>
+                <div style={{ fontSize: '0.8rem', color: '#666' }}>2 mins ago • Pune, MH</div>
               </div>
             </motion.div>
 
@@ -125,7 +243,7 @@ export default function Home() {
               <div className={styles.floatIcon}><Shield size={24} /></div>
               <div>
                 <div style={{ fontWeight: 'bold' }}>Insured & Secure</div>
-                <div style={{ fontSize: '0.8rem', color: '#666' }}>Up to $500 protection</div>
+                <div style={{ fontSize: '0.8rem', color: '#666' }}>Up to ₹15,000 protection</div>
               </div>
             </motion.div>
 
@@ -224,10 +342,42 @@ export default function Home() {
               Join the revolution of decentralized logistics.
             </p>
             
-            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'center' }}>
               <DownloadBadge store="App Store" />
               <DownloadBadge store="Google Play" />
-              <DownloadBadge store="Direct APK" />
+            </div>
+
+            {/* Distinct APK Button - Separated & Glowing */}
+            <div style={{ marginTop: '3rem', display: 'flex', justifyContent: 'center' }}>
+              <motion.button 
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                whileHover={{ scale: 1.05 }}
+                style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '1rem', 
+                  padding: '1rem 2rem', 
+                  background: 'rgba(16, 185, 129, 0.1)', // Very subtle green tint
+                  border: '1px solid rgba(16, 185, 129, 0.3)',
+                  borderRadius: '100px', // Pill shape
+                  color: '#fff',
+                  cursor: 'pointer',
+                  textAlign: 'left',
+                  boxShadow: '0 0 20px rgba(16, 185, 129, 0.2), inset 0 0 10px rgba(16, 185, 129, 0.05)', // Subtle Glow
+                  backdropFilter: 'blur(10px)'
+                }}
+                className="apk-btn"
+              >
+                <div style={{ color: '#34d399', display: 'flex' }}>
+                   <Package size={24} />
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                  <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '1px', color: '#34d399', fontWeight: 'bold' }}>Developer Option</span>
+                  <span style={{ fontSize: '1.1rem', fontWeight: '600' }}>Download Direct APK</span>
+                </div>
+              </motion.button>
             </div>
             
             {/* Contextual mockups peeking from bottom */}
