@@ -1,78 +1,225 @@
-import React from 'react';
+"use client";
+
+import React from "react";
+import { motion } from "framer-motion";
+import {
+  Package,
+  FileText,
+  Zap,
+  ShoppingBag,
+  Shield,
+  Clock,
+  Users,
+  ArrowRight,
+  Star
+} from "lucide-react";
+import styles from "@/app/home.module.css"; // Reusing homepage design system
 
 export default function ServicesPage() {
   return (
-    <div className="container" style={{ padding: '4rem 1rem' }}>
-      <h1 style={{ marginBottom: '3rem', textAlign: 'center' }}>Our Services</h1>
+    <main className={styles.main}>
+      
+      {/* HERO */}
+      <section className={styles.heroSection}>
+        <div className={styles.heroContent}>
+          <motion.div
+            className={styles.heroText}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1>
+              Flexible delivery <br />
+              for every kind of <br />
+              package.
+            </h1>
+            <p>
+              From urgent documents to parcels, QuickDoot connects you with
+              trusted travelers already heading your way.
+            </p>
 
-      {/* Services Overview */}
-      <section className="section" style={{ borderBottom: 'none' }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
-           <h2 style={{ marginBottom: '1rem' }}>What We Offer</h2>
-           <p style={{ fontSize: '1.1rem', lineHeight: '1.6' }}>
-            {/* Placeholder: Service overview text */}
-            QuickDoot provides a decentralized logistics platform connecting senders with travelers. 
-            We make delivery faster, cheaper, and friendlier.
-           </p>
+            <div className={styles.ctaGroup}>
+              <button className={styles.primaryBtn}>
+                Send a Package <ArrowRight size={18} />
+              </button>
+              <button className={styles.secondaryBtn}>
+                Become a Carrier
+              </button>
+            </div>
+
+          </motion.div>
+
+          <motion.div
+            className={styles.heroVisual}
+            initial={{ opacity: 0, x: 60 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <div className={styles.phoneFrame}>
+              <div className={styles.screenContent} style={{ padding: "2rem" }}>
+                <h3 style={{ fontWeight: 700, marginBottom: "1rem" }}>Active Delivery</h3>
+                <div style={{ background: "#f3f4f6", borderRadius: "20px", padding: "1.5rem" }}>
+                  <Package size={28} />
+                  <p style={{ marginTop: "1rem", fontWeight: 600 }}>Raipur → Delhi</p>
+                  <p style={{ fontSize: "0.9rem", color: "#666" }}>Arriving in 3h 12m</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Peer-to-Peer Model Breakdown */}
-      <section className="section">
-        <h2 style={{ marginBottom: '2rem', textAlign: 'center' }}>How Peer-to-Peer Works</h2>
-        <div className="grid">
-          <div className="card">
-            <h3 style={{ marginBottom: '0.5rem' }}>For Senders</h3>
-            <p>Cheap, fast shipping by utilizing extra space in cars or bags. Ship anything from keys to furniture.</p>
-          </div>
-          <div className="card">
-            <h3 style={{ marginBottom: '0.5rem' }}>For Delivery Partners</h3>
-            <p>Earn money while you travel by carrying packages. Offset your travel costs effortlessly.</p>
-          </div>
-          <div className="card">
-            <h3 style={{ marginBottom: '0.5rem' }}>For Receivers</h3>
-            <p>Real-time tracking and secure handoff. Know exactly when your package will arrive.</p>
-          </div>
+      {/* SERVICE TYPES */}
+
+      {/* TRUST & SAFETY */}
+      <section className={styles.stepsSection}>
+        <div className={styles.stepsContainer}>
+          <StepRow
+            number="01"
+            title="Escrow Protected Payments"
+            description="Your payment is held securely and only released once delivery is confirmed. No scams. No surprises."
+            imagePlaceholder="Secure Payment"
+          />
+          <StepRow
+            number="02"
+            title="Real-Time Tracking"
+            description="Follow your package live as your carrier travels. Stay updated every step of the journey."
+            imagePlaceholder="Live Tracking"
+            reversed
+          />
+          <StepRow
+            number="03"
+            title="Verified Community"
+            description="Every Dooter is identity-verified and reviewed by the community for safety and trust."
+            imagePlaceholder="Verified Users"
+          />
         </div>
       </section>
 
-      {/* Pricing Model Placeholder */}
-      <section className="section">
-        <h2 style={{ marginBottom: '2rem', textAlign: 'center' }}>Pricing Model</h2>
-        <div className="card" style={{ textAlign: 'center', maxWidth: '600px', margin: '0 auto', backgroundColor: '#f9f9f9' }}>
-          <h3 style={{ marginBottom: '1rem' }}>Flexible Pricing</h3>
-          {/* Placeholder: Pricing details */}
-          <p style={{ marginBottom: '1rem' }}>Prices are determined by distance, weight, and urgency. Negotiable between peers.</p>
-          <ul style={{ listStyle: 'none', padding: 0 }}>
-             <li style={{ padding: '0.5rem 0', borderBottom: '1px solid #ddd' }}>Small Items: $5 - $15</li>
-             <li style={{ padding: '0.5rem 0', borderBottom: '1px solid #ddd' }}>Medium Packages: $15 - $40</li>
-             <li style={{ padding: '0.5rem 0' }}>Large/Bulky: $40+</li>
-          </ul>
+      {/* FINAL CTA */}
+      <section className={styles.downloadSection}>
+        <div className={styles.downloadContent}>
+          <motion.div
+            initial={{ scale: 0.95, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 className={styles.largeHeading} style={{ color: "#fff" }}>
+              Ready to ship <span className={styles.gradientText}>smarter?</span>
+            </h2>
+            <p style={{ maxWidth: "600px", margin: "0 auto 2.5rem auto", fontSize: "1.2rem", color: "#aaa" }}>
+              Join thousands using QuickDoot to move items faster, cheaper, and more human.
+            </p>
+
+            <div style={{ display: "flex", gap: "1.5rem", justifyContent: "center", flexWrap: "wrap" }}>
+              <button className={styles.primaryBtn}>Send a Package</button>
+              <button className={styles.secondaryBtn}>Start Earning as a Carrier</button>
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Use Cases Placeholder */}
-      <section className="section" style={{ borderBottom: 'none' }}>
-        <h2 style={{ marginBottom: '2rem', textAlign: 'center' }}>Common Use Cases</h2>
-        <div className="grid">
-           <div className="card">
-              <h4>Forgot Keys?</h4>
-              <p>Get them delivered in minutes.</p>
-           </div>
-           <div className="card">
-              <h4>College Move-in</h4>
-              <p>Find help moving boxes to dorms.</p>
-           </div>
-           <div className="card">
-              <h4>Business Couriers</h4>
-              <p>Send documents across town securely.</p>
-           </div>
-           <div className="card">
-              <h4>Online Marketplace Buys</h4>
-              <p>Bought something on Craigslist? Get it picked up.</p>
-           </div>
+    </main>
+  );
+}
+
+/* --- Components --- */
+
+function ServiceCard({
+  icon,
+  title,
+  description,
+  price,
+  highlight = false
+}: {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  price: string;
+  highlight?: boolean;
+}) {
+  return (
+    <div
+      className={styles.featureCard}
+      style={{
+        border: highlight ? "2px solid #000" : "1px solid #eee",
+        transform: highlight ? "scale(1.05)" : "scale(1)"
+      }}
+    >
+      <div>
+        <div
+          style={{
+            width: "60px",
+            height: "60px",
+            background: "#000",
+            borderRadius: "15px",
+            color: "#fff",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginBottom: "1.5rem"
+          }}
+        >
+          {icon}
         </div>
-      </section>
+        <h3 style={{ fontSize: "1.8rem", fontWeight: 700 }}>{title}</h3>
+        <p style={{ color: "#666", margin: "1rem 0" }}>{description}</p>
+        <div style={{ fontSize: "2rem", fontWeight: 800 }}>{price}</div>
+      </div>
+
+      <div style={{ marginTop: "2rem", fontWeight: 600, display: "flex", alignItems: "center", gap: "0.5rem" }}>
+        Select Plan <ArrowRight size={16} />
+      </div>
     </div>
+  );
+}
+
+function StepRow({
+  number,
+  title,
+  description,
+  imagePlaceholder,
+  reversed = false
+}: {
+  number: string;
+  title: string;
+  description: string;
+  imagePlaceholder: string;
+  reversed?: boolean;
+}) {
+  return (
+    <motion.div
+      className={`${styles.stepRow} ${reversed ? styles.reversed : ""}`}
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+    >
+      <div className={styles.stepText}>
+        <span className={styles.stepNumber}>{number}</span>
+        <h3 style={{ fontSize: "2.5rem", fontWeight: 800, margin: "1rem 0" }}>{title}</h3>
+        <p style={{ fontSize: "1.2rem", color: "#666", lineHeight: 1.6 }}>{description}</p>
+      </div>
+
+      <div className={styles.stepVisual}>
+        <div
+          style={{
+            width: "100%",
+            maxWidth: "500px",
+            height: "350px",
+            background: "#f3f4f6",
+            borderRadius: "30px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: "1.3rem",
+            fontWeight: "bold",
+            color: "#aaa"
+          }}
+        >
+          {imagePlaceholder}
+        </div>
+      </div>
+    </motion.div>
   );
 }
