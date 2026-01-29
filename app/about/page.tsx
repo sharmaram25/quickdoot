@@ -3,7 +3,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Smartphone } from "lucide-react";
-import Navbar from "../navbar/page";
 import styles from "@/app/home.module.css";
 
 export default function AboutPage() {
@@ -31,11 +30,10 @@ export default function AboutPage() {
 
   return (
     <>
-      <Navbar />
 
       <main className={styles.main}>
         {/* Hero Section */}
-        <section className={styles.heroSection}>
+        <section className={styles.heroSection} style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', background: '#f8fafc' }}>
           <div className={styles.heroContent}>
             <motion.div
               className={styles.heroText}
@@ -43,12 +41,13 @@ export default function AboutPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
             >
-              <h1>About QuickDoot</h1>
-              <p>
-                QuickDoot connects people worldwide through a decentralized peer-to-peer delivery network.
-                Our mission is to make sending anything as easy as sending a message, while empowering communities globally.
+              <h1 style={{ fontSize: '4rem', fontWeight: 800, marginBottom: '1.5rem', letterSpacing: '-1.5px' }}>
+                Building the <span className={styles.gradientText}>future</span> of <br/> decentralized logistics.
+              </h1>
+              <p style={{ fontSize: '1.25rem', color: '#666', lineHeight: 1.6, maxWidth: '600px', marginBottom: '2rem' }}>
+                QuickDoot isn't just an app; it's a movement. We connect people worldwide through a trust-based peer-to-peer delivery network, empowering communities one package at a time.
               </p>
-              <button className={styles.primaryBtn}>
+              <button className={styles.primaryBtn} style={{ padding: '1rem 2rem', fontSize: '1.1rem' }}>
                 Get the App <Smartphone size={20} />
               </button>
             </motion.div>
@@ -58,15 +57,28 @@ export default function AboutPage() {
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
+              style={{ display: 'flex', justifyContent: 'center' }}
             >
-              <div className={styles.phoneFrame}>
-                <div
-                  className={styles.screenContent}
-                  style={{ display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.2rem", color: "#aaa" }}
-                >
-                  App Mockup
-                </div>
-              </div>
+               {/* 3D-like Composition */}
+               <div style={{ position: 'relative', width: '400px', height: '400px' }}>
+                  <div style={{ 
+                    position: 'absolute', top: 0, right: 0, width: '300px', height: '300px', 
+                    background: 'url(https://placehold.co/600x600/10b981/fff?text=Community)', backgroundSize: 'cover', borderRadius: '40px',
+                    transform: 'rotate(5deg)', boxShadow: '0 20px 50px rgba(0,0,0,0.1)', zIndex: 1
+                  }}></div>
+                  <div style={{ 
+                    position: 'absolute', bottom: 0, left: 0, width: '300px', height: '300px', 
+                    background: 'url(https://placehold.co/600x600/3b82f6/fff?text=Technology)', backgroundSize: 'cover', borderRadius: '40px',
+                    transform: 'rotate(-10deg)', boxShadow: '0 20px 50px rgba(0,0,0,0.1)', zIndex: 2
+                  }}></div>
+                   <div style={{ 
+                    position: 'absolute', top: '40%', left: '40%', width: '120px', height: '120px', 
+                    background: '#fff', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    boxShadow: '0 10px 30px rgba(0,0,0,0.15)', zIndex: 3
+                  }}>
+                     <Smartphone size={40} color="#000" />
+                  </div>
+               </div>
             </motion.div>
           </div>
         </section>

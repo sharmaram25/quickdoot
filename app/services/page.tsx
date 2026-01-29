@@ -20,7 +20,8 @@ export default function ServicesPage() {
     <main className={styles.main}>
       
       {/* HERO */}
-      <section className={styles.heroSection}>
+      {/* HERO */}
+      <section className={styles.heroSection} style={{ minHeight: '80vh', display: 'flex', alignItems: 'center' }}>
         <div className={styles.heroContent}>
           <motion.div
             className={styles.heroText}
@@ -28,42 +29,128 @@ export default function ServicesPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1>
-              Flexible delivery <br />
+            <span style={{ 
+              display: 'inline-block', 
+              padding: '6px 12px', 
+              background: '#f3f4f6', 
+              borderRadius: '20px', 
+              fontSize: '0.8rem', 
+              fontWeight: '700', 
+              color: '#4f46e5',
+              marginBottom: '1.5rem',
+              letterSpacing: '1px',
+              textTransform: 'uppercase'
+            }}>
+              Services
+            </span>
+            <h1 style={{ fontSize: '4.5rem', lineHeight: 1.1, marginBottom: '1.5rem', letterSpacing: '-2px' }}>
+              <span className={styles.gradientText}>Flexible delivery</span> <br />
               for every kind of <br />
               package.
             </h1>
-            <p>
+            <p style={{ fontSize: '1.3rem', color: '#666', maxWidth: '500px', lineHeight: 1.6, marginBottom: '2.5rem' }}>
               From urgent documents to parcels, QuickDoot connects you with
               trusted travelers already heading your way.
             </p>
 
             <div className={styles.ctaGroup}>
-              <button className={styles.primaryBtn}>
-                Send a Package <ArrowRight size={18} />
+              <button className={styles.primaryBtn} style={{ padding: '1rem 2rem', fontSize: '1.1rem' }}>
+                Send a Package <ArrowRight size={20} />
               </button>
-              <button className={styles.secondaryBtn}>
+              <button className={styles.secondaryBtn} style={{ padding: '1rem 2rem', fontSize: '1.1rem' }}>
                 Become a Carrier
               </button>
+            </div>
+
+            <div style={{ marginTop: '3rem', display: 'flex', gap: '2rem', color: '#666', fontSize: '0.9rem', fontWeight: '500' }}>
+               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><Shield size={16} color="#4f46e5" /> Insured up to ₹15k</div>
+               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><Clock size={16} color="#4f46e5" /> Same-day delivery</div>
             </div>
 
           </motion.div>
 
           <motion.div
             className={styles.heroVisual}
-            initial={{ opacity: 0, x: 60 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
+            style={{ display: 'flex', justifyContent: 'center' }}
           >
-            <div className={styles.phoneFrame}>
-              <div className={styles.screenContent} style={{ padding: "2rem" }}>
-                <h3 style={{ fontWeight: 700, marginBottom: "1rem" }}>Active Delivery</h3>
-                <div style={{ background: "#f3f4f6", borderRadius: "20px", padding: "1.5rem" }}>
-                  <Package size={28} />
-                  <p style={{ marginTop: "1rem", fontWeight: 600 }}>Raipur → Delhi</p>
-                  <p style={{ fontSize: "0.9rem", color: "#666" }}>Arriving in 3h 12m</p>
-                </div>
-              </div>
+            <div style={{ 
+              position: 'relative', 
+              width: '100%', 
+              maxWidth: '500px', 
+              height: '600px', 
+              background: 'linear-gradient(135deg, #eef2ff 0%, #ffffff 100%)',
+              borderRadius: '30px',
+              padding: '2rem',
+              boxShadow: '0 20px 40px rgba(0,0,0,0.05)',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1.5rem'
+            }}>
+               {/* Decorative Cards */}
+               <motion.div 
+                 animate={{ y: [0, -10, 0] }}
+                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                 style={{ background: '#fff', padding: '1.5rem', borderRadius: '20px', boxShadow: '0 10px 25px rgba(0,0,0,0.05)' }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                       <div style={{ padding: '10px', background: '#f0fdf4', borderRadius: '12px', color: '#15803d' }}> <Package size={24} /> </div>
+                       <div>
+                         <div style={{ fontWeight: '700' }}>Electronics</div>
+                         <div style={{ fontSize: '0.8rem', color: '#888' }}>Documents & Gadgets</div>
+                       </div>
+                    </div>
+                    <span style={{ fontWeight: 'bold' }}>₹1,500</span>
+                  </div>
+                  <div style={{ height: '4px', width: '100%', background: '#f0f0f0', borderRadius: '2px', overflow: 'hidden' }}>
+                    <div style={{ height: '100%', width: '70%', background: '#10b981' }}></div>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', marginTop: '0.5rem', color: '#666' }}>
+                    <span>On the way</span>
+                    <span>Arriving 2:40 PM</span>
+                  </div>
+               </motion.div>
+
+               <motion.div 
+                 animate={{ y: [0, -15, 0] }}
+                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                 style={{ background: '#fff', padding: '1.5rem', borderRadius: '20px', boxShadow: '0 10px 25px rgba(0,0,0,0.05)' }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                       <div style={{ padding: '10px', background: '#eff6ff', borderRadius: '12px', color: '#1d4ed8' }}> <ShoppingBag size={24} /> </div>
+                       <div>
+                         <div style={{ fontWeight: '700' }}>Shopping</div>
+                         <div style={{ fontSize: '0.8rem', color: '#888' }}>Retail & Gifts</div>
+                       </div>
+                    </div>
+                    <span style={{ fontWeight: 'bold' }}>₹450</span>
+                  </div>
+                  <div style={{ display: 'flex', gap: '-0.5rem' }}>
+                     {[1,2,3].map(i => <div key={i} style={{ width: 24, height: 24, borderRadius: '50%', background: '#ddd', border: '2px solid #fff', marginLeft: i>1?'-8px':0 }}></div>)}
+                  </div>
+               </motion.div>
+
+               <motion.div 
+                 animate={{ y: [0, -10, 0] }}
+                 transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                 style={{ background: '#fff', padding: '1.5rem', borderRadius: '20px', boxShadow: '0 10px 25px rgba(0,0,0,0.05)' }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                       <div style={{ padding: '10px', background: '#fff7ed', borderRadius: '12px', color: '#c2410c' }}> <FileText size={24} /> </div>
+                       <div>
+                         <div style={{ fontWeight: '700' }}>Legal Docs</div>
+                         <div style={{ fontSize: '0.8rem', color: '#888' }}>Urgent Contracts</div>
+                       </div>
+                    </div>
+                    <span style={{ fontWeight: 'bold' }}>₹2,500</span>
+                  </div>
+                  <button style={{ width: '100%', padding: '0.5rem', borderRadius: '8px', border: '1px solid #ddd', background: 'transparent', fontWeight: '600', fontSize: '0.8rem' }}>Track Item</button>
+               </motion.div>
             </div>
           </motion.div>
         </div>
