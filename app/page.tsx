@@ -2,7 +2,7 @@
 
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
-import { ArrowRight, Package, Shield, Zap, Smartphone, MapPin, Users, Star } from 'lucide-react';
+import { ArrowRight, Package, Shield, Zap, Smartphone, MapPin, Users, Star, Car } from 'lucide-react';
 import styles from './home.module.css';
 
 export default function Home() {
@@ -133,10 +133,13 @@ export default function Home() {
                        stroke="#0ea5e9" 
                        strokeWidth="4" 
                        strokeDasharray="8 4"
+                       strokeLinecap="round"
                        initial={{ strokeDashoffset: 0 }}
                        animate={{ strokeDashoffset: -100 }}
-                       transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                       transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
                      />
+                     {/* Start Dot */}
+                     <circle cx="120" cy="250" r="4" fill="#ef4444" />
                    </svg>
 
                    {/* Floating Context Label */}
@@ -171,15 +174,38 @@ export default function Home() {
                      </div>
                    </motion.div>
 
-                   {/* Moving Driver */}
+                   {/* Moving Driver - Car Animation */}
                    <motion.div 
                      style={{ position: 'absolute', zIndex: 6 }}
-                     animate={{ top: [230, 440], left: [105, 165] }} // Simple movement along path
-                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                     // Bezier curve approximation for: M 120 250 Q 200 350 180 450
+                     // Adjusted for icon center offset (-15px)
+                     animate={{ 
+                       top: [235, 285, 335, 385, 435], 
+                       left: [105, 139, 160, 169, 165],
+                       rotate: [25, 45, 80, 100, 110] // Approximate tangential rotation
+                     }} 
+                     transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
                    >
-                      <div style={{ background: '#fff', padding: '6px', borderRadius: '50%', boxShadow: '0 4px 10px rgba(0,0,0,0.2)', border: '2px solid #0ea5e9' }}>
-                        <Zap size={16} fill="#0ea5e9" color="#0ea5e9" />
+                      <div style={{ 
+                        background: '#fff', 
+                        padding: '8px', 
+                        borderRadius: '50%', 
+                        boxShadow: '0 4px 15px rgba(0,0,0,0.15)', 
+                        border: '2px solid #10b981',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: '36px',
+                        height: '36px'
+                      }}>
+                        <Car size={18} color="#10b981" fill="#ecfdf5" />
                       </div>
+                      {/* Pulse Effect */}
+                      <motion.div 
+                        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', borderRadius: '50%', background: 'rgba(16, 185, 129, 0.4)', zIndex: -1 }}
+                        animate={{ scale: [1, 2], opacity: [0.6, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                      />
                    </motion.div>
                 </div>
                 {/* Mock Bottom Sheet */}
